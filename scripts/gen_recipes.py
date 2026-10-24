@@ -52,7 +52,8 @@ def recipe(upstream: str, deps: list[str], cmake_args: list[str]) -> dict:
     build = ["${{ compiler('c') }}", "${{ compiler('cxx') }}", "${{ stdlib('c') }}", "cmake", "ninja", "pkg-config"]
     host = []
     if not is_ecm:
-        build.append("python")
+        # KF6I18n's CMake config needs msgfmt/msgmerge in every consumer.
+        build += ["python", "gettext"]
         host = ["kf6-ecm", f"qt6-main {QT}", "libgl-devel", "libopengl-devel", *deps]
     args = " ".join(["-DCMAKE_BUILD_TYPE=Release", *COMMON_ARGS, *cmake_args])
     script = [

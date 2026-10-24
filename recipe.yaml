@@ -22,6 +22,7 @@ requirements:
   - cmake
   - ninja
   - pkg-config
+  - gettext
   host:
   - kf6-ecm
   - qt6-main 6.11.2.*
