@@ -1,10 +1,27 @@
 # PySide6 + Union demo
 
 A small PySide6 / Kirigami app using the `org.kde.union` Qt Quick Controls style
-from the `kde-union` package. A `Kirigami.ApplicationWindow` with a collapsible
-global drawer switches between four pages: a Counter, the common controls in a
-`Kirigami.FormLayout`, a Live page of bars, a dial and a progress bar animated
-from a Python `QTimer`, and a filterable list. The drawer also opens an About dialog.
+from the `kde-union` package, built to show off Qt Quick animation. A
+`Kirigami.ApplicationWindow` with a collapsible global drawer switches between
+pages that each fade and slide in:
+
+- **Counter**: the Python counter as a rolling number (`Behavior` +
+  `NumberAnimation`) with an elastic pop, inside a `Shape` ring that springs to
+  its mark (`SpringAnimation`).
+- **States**: one element with three `State`s whose `Transition` animates
+  position, size, rotation and colour with different easings, plus a 3D
+  `Flipable` card and a `MultiEffect` glow.
+- **Easing**: the same trip under eight easing curves, side by side.
+- **Springs**: a swarm of dots on springs of different stiffness chasing the
+  pointer (or a wandering target when the pointer rests).
+- **Particles**: a `QtQuick.Particles` emitter tracing a Lissajous curve, or
+  following the pointer, with gravity and turbulence.
+- **List**: a `ListModel` whose add, remove, move and displaced transitions
+  animate; clicking a row pushes a detail page that Kirigami slides in as a
+  second column.
+- **Live**: bars riding a sine wave driven from a Python `QTimer`.
+
+The drawer also opens an About dialog.
 `kde-union` ships Kirigami's platform plugin, so Kirigami picks up Union's theme
 and units (`kf6-kirigami` comes from the same channel).
 
