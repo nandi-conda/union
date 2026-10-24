@@ -59,9 +59,11 @@ def recipe(upstream: str, deps: list[str], cmake_args: list[str]) -> dict:
         host = ["kf6-ecm", f"qt6-main {QT}", "libgl-devel", "libopengl-devel", *deps]
     args = " ".join(["-DCMAKE_BUILD_TYPE=Release", *COMMON_ARGS, *cmake_args])
     script = [
-        "cmake -GNinja -S . -B build $CMAKE_ARGS "
-        '-DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib '
-        f"{args}",
+        (
+            "cmake -GNinja -S . -B build $CMAKE_ARGS "
+            '-DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib '
+            f"{args}"
+        ),
         "cmake --build build",
         "cmake --install build",
     ]
