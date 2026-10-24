@@ -1,0 +1,6 @@
+[environment]
+python = ".pixi/envs/default"
+
+[src]
+# Hidden dirs (.pixi envs) hold the environment, not our code.
+exclude = ["**/.*"]
