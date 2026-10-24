@@ -14,6 +14,8 @@ import yaml
 
 KF_VERSION = "6.31.0"
 QT = "6.11.2.*"
+QT_RUN = "qt6-main >=6.11.2,<6.12"
+BUILD_NUMBER = 1  # bump to republish: uploads skip files already on the channel
 ROOT = Path(__file__).resolve().parent.parent
 
 COMMON_ARGS = [
@@ -65,12 +67,14 @@ def recipe(upstream: str, deps: list[str], cmake_args: list[str]) -> dict:
     ]
     reqs: dict = {"build": build, "host": host}
     if not is_ecm:
+        # qt6-main's run_exports allow any 6.x, but these use Qt private API.
+        reqs["run"] = [QT_RUN]
         reqs["run_exports"] = [f"${{{{ pin_subpackage('{name}', upper_bound='x.x') }}}}"]
     return {
         "context": {"version": KF_VERSION},
         "package": {"name": name, "version": "${{ version }}"},
         "source": {"git": f"https://github.com/KDE/{upstream}.git", "tag": f"v{KF_VERSION}"},
-        "build": {"number": 0, "script": script, **({"noarch": "generic"} if is_ecm else {})},
+        "build": {"number": 0 if is_ecm else BUILD_NUMBER, "script": script, **({"noarch": "generic"} if is_ecm else {})},
         "requirements": reqs,
         "about": {
             "homepage": f"https://invent.kde.org/frameworks/{upstream}",

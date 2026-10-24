@@ -11,7 +11,7 @@ source:
 - path: activate
   target_directory: conda-activate
 build:
-  number: 1
+  number: 2
   script:
   - cmake -GNinja -S . -B build $CMAKE_ARGS -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DBUILD_QCH=OFF -DBUILD_EXAMPLES=OFF -DKDE_INSTALL_QMLDIR=lib/qt6/qml -DKDE_INSTALL_PLUGINDIR=lib/qt6/plugins
   - cmake --build build
@@ -42,6 +42,9 @@ requirements:
   - kf6-kcolorscheme
   - kf6-kiconthemes
   - kf6-kirigami
+  run:
+  # Union uses Qt private API; qt6-main's own run_exports would allow any 6.x.
+  - qt6-main >=6.11.2,<6.12
 tests:
 - script:
   - test -f $PREFIX/lib/qt6/qml/org/kde/union/qmldir
