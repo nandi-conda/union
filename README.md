@@ -19,3 +19,8 @@ pixi add --channel https://repo.prefix.dev/nandi-testing kde-union pyside6
   as a local channel. CI runs it through the shared [nandi-conda/ci](https://github.com/nandi-conda/ci) workflow.
 
 Build everything locally with `pixi run build`.
+
+## Example
+
+[`examples/pyside6-demo`](examples/pyside6-demo) is a small PySide6 app using the
+`org.kde.union` style from this channel (`pixi run demo`).
