@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "KWin/Script",
+    "KPlugin": {
+        "Authors": [{ "Name": "V" }],
+        "Description": "Sparks that follow the mouse pointer",
+        "EnabledByDefault": false,
+        "Icon": "input-mouse",
+        "Id": "particletrail",
+        "License": "GPL-2.0-or-later",
+        "Name": "Particle Trail",
+        "Version": "0.1"
+    },
+    "X-Plasma-API": "declarativescript"
+}
