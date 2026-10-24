@@ -29,7 +29,7 @@ KF = {
     "kconfig": ([], []),
     "kcoreaddons": (["util-linux"], []),
     "kguiaddons": (["xorg-libx11", "libxcb"], ["-DWITH_WAYLAND=OFF"]),
-    "ki18n": (["gettext", "libintl-devel", "iso-codes"], []),
+    "ki18n": (["gettext", "iso-codes"], []),
     "kwidgetsaddons": ([], []),
     "karchive": (["zlib", "bzip2", "xz", "zstd", "openssl"], []),
     "kcolorscheme": (["kf6-kconfig", "kf6-kguiaddons", "kf6-ki18n"], []),
