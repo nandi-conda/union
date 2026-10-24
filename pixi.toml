@@ -1,0 +1,14 @@
+[workspace]
+name = "union-packaging"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = "*"
+pyyaml = "*"
+rattler-build = "*"
+
+[tasks]
+gen = "python scripts/gen_recipes.py"
+build-chain = "bash ci/pre-package.sh"
+build = { cmd = "rattler-build build --recipe recipe.yaml -c conda-forge -c ./output --output-dir output", depends-on = ["build-chain"] }

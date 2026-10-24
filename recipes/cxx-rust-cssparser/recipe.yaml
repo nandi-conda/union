@@ -1,0 +1,31 @@
+context:
+  version: 1.1.0
+package:
+  name: cxx-rust-cssparser
+  version: ${{ version }}
+source:
+  git: https://github.com/KDE/cxx-rust-cssparser.git
+  tag: v${{ version }}
+build:
+  number: 0
+  script:
+  - cmake -GNinja -S . -B build $CMAKE_ARGS -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DBUILD_DOCS=OFF
+  - cmake --build build
+  - cmake --install build
+requirements:
+  build:
+  - ${{ compiler('c') }}
+  - ${{ compiler('cxx') }}
+  - ${{ compiler('rust') }}
+  - ${{ stdlib('c') }}
+  - cmake
+  - ninja
+  - corrosion
+  host:
+  - kf6-ecm
+  run_exports:
+  - ${{ pin_subpackage('cxx-rust-cssparser', upper_bound='x.x') }}
+about:
+  homepage: https://invent.kde.org/libraries/cxx-rust-cssparser
+  license: BSD-2-Clause
+  summary: C++ CSS parser built on the Rust cssparser crate, used by KDE Union

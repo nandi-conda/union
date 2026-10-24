@@ -1,0 +1,20 @@
+# Builds Union's chain (ci/pre-package.sh) and Union with the shared nandi-conda
+# workflow and, on pushes to main, publishes them to prefix.dev/nandi-testing.
+name: Package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  package:
+    uses: nandi-conda/ci/.github/workflows/conda-package.yml@main
+    secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      build-channels: conda-forge ./output
+      timeout-minutes: 240

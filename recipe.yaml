@@ -1,0 +1,45 @@
+# KDE Union, built against conda-forge's Qt so it loads into a pixi PySide6.
+# Its dependency chain (recipes/, built by ci/pre-package.sh) must be in ./output first.
+context:
+  version: 6.8.1
+package:
+  name: kde-union
+  version: ${{ version }}
+source:
+  git: https://github.com/KDE/union.git
+  tag: v${{ version }}
+build:
+  number: 0
+  script:
+  - cmake -GNinja -S . -B build $CMAKE_ARGS -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DBUILD_QCH=OFF -DBUILD_EXAMPLES=OFF -DKDE_INSTALL_QMLDIR=lib/qt6/qml -DKDE_INSTALL_PLUGINDIR=lib/qt6/plugins
+  - cmake --build build
+  - cmake --install build
+requirements:
+  build:
+  - ${{ compiler('c') }}
+  - ${{ compiler('cxx') }}
+  - ${{ stdlib('c') }}
+  - cmake
+  - ninja
+  - pkg-config
+  host:
+  - kf6-ecm
+  - qt6-main 6.11.2.*
+  - libgl-devel
+  - libopengl-devel
+  - zlib
+  - cxx-rust-cssparser
+  - kf6-kconfig
+  - kf6-kcoreaddons
+  - kf6-kguiaddons
+  - kf6-ki18n
+  - kf6-kcolorscheme
+  - kf6-kiconthemes
+  - kf6-kirigami
+tests:
+- script:
+  - test -f $PREFIX/lib/qt6/qml/org/kde/union/qmldir
+about:
+  homepage: https://invent.kde.org/plasma/union
+  license: LGPL-2.1-or-later
+  summary: KDE Union style engine (Qt Quick and Qt Widgets styles)

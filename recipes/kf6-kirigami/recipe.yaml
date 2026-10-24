@@ -1,0 +1,35 @@
+context:
+  version: 6.31.0
+package:
+  name: kf6-kirigami
+  version: ${{ version }}
+source:
+  git: https://github.com/KDE/kirigami.git
+  tag: v6.31.0
+build:
+  number: 0
+  script:
+  - cmake -GNinja -S . -B build $CMAKE_ARGS -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DBUILD_QCH=OFF -DBUILD_PYTHON_BINDINGS=OFF
+    -DBUILD_DESIGNERPLUGIN=OFF
+  - cmake --build build
+  - cmake --install build
+requirements:
+  build:
+  - ${{ compiler('c') }}
+  - ${{ compiler('cxx') }}
+  - ${{ stdlib('c') }}
+  - cmake
+  - ninja
+  - pkg-config
+  - python
+  host:
+  - kf6-ecm
+  - qt6-main 6.11.2.*
+  - libgl-devel
+  - libopengl-devel
+  run_exports:
+  - ${{ pin_subpackage('kf6-kirigami', upper_bound='x.x') }}
+about:
+  homepage: https://invent.kde.org/frameworks/kirigami
+  license: LGPL-2.0-or-later
+  summary: 'KDE Frameworks 6: kirigami'
