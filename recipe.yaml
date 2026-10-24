@@ -6,14 +6,19 @@ package:
   name: kde-union
   version: ${{ version }}
 source:
-  git: https://github.com/KDE/union.git
+- git: https://github.com/KDE/union.git
   tag: v${{ version }}
+- path: activate
+  target_directory: conda-activate
 build:
   number: 0
   script:
   - cmake -GNinja -S . -B build $CMAKE_ARGS -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX" -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DBUILD_QCH=OFF -DBUILD_EXAMPLES=OFF -DKDE_INSTALL_QMLDIR=lib/qt6/qml -DKDE_INSTALL_PLUGINDIR=lib/qt6/plugins
   - cmake --build build
   - cmake --install build
+  - mkdir -p $PREFIX/etc/conda/activate.d $PREFIX/etc/conda/deactivate.d
+  - cp conda-activate/activate.sh $PREFIX/etc/conda/activate.d/kde-union.sh
+  - cp conda-activate/deactivate.sh $PREFIX/etc/conda/deactivate.d/kde-union.sh
 requirements:
   build:
   - ${{ compiler('c') }}
