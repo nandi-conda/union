@@ -16,6 +16,9 @@ ty = ">=0.0.91,<0.0.92"
 # Stubs so ty can check scripts/gen_recipes.py, which imports yaml.
 types-pyyaml = "*"
 kde-union = ">=6.8.1,<7"
+# Kirigami (from nandi-testing, same Qt 6.11). kde-union ships its Kirigami
+# platform plugin, so Kirigami picks up Union's theme and units.
+kf6-kirigami = ">=6.31.0,<7"
 # conda-forge's Qt loads GL through the env's libglvnd, which can't use the
 # distro's Mesa, so the env needs its own. conda-forge's Mesa has no Wayland
 # EGL, so the demo task uses X11 (XWayland) with Mesa's software GL (llvmpipe).

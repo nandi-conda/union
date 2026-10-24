@@ -23,4 +23,4 @@ Build everything locally with `pixi run build`.
 ## Example
 
 [`examples/pyside6-demo`](examples/pyside6-demo) is a small PySide6 app using the
-`org.kde.union` style from this channel (`pixi run demo`).
+`org.kde.union` style and Kirigami from this channel (`pixi run demo`).
