@@ -1,9 +1,6 @@
-# Zed runs ty from the repo root, so the example's own ty.toml is not picked up.
-# Resolve the root env plus the example's env (which has PySide6).
 [environment]
 python = ".pixi/envs/default"
-extra-paths = ["examples/pyside6-demo/.pixi/envs/default/lib/python3.15/site-packages"]
 
 [src]
-# Hidden dirs (.pixi envs) hold the environments, not our code.
+# Hidden dirs (.pixi envs) hold the environment, not our code.
 exclude = ["**/.*"]
