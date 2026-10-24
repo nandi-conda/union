@@ -11,4 +11,5 @@ rattler-build = "*"
 [tasks]
 gen = "python scripts/gen_recipes.py"
 build-chain = "bash ci/pre-package.sh"
+demo = { cmd = "pixi run demo", cwd = "examples/pyside6-demo" }
 build = { cmd = "rattler-build build --recipe recipe.yaml -c conda-forge -c ./output --output-dir output", depends-on = ["build-chain"] }
